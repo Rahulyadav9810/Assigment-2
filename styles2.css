@@ -1,0 +1,449 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Spline+Sans:wght@300..700&display=swap');
+
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, sans-serif;
+}
+
+h1{
+  font-family: Zin Display;
+  font-weight: 600;
+  font-style: Demo;
+  font-size: 33px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  width: 320px;
+  height: 45px;
+  opacity: 1;
+  top: 85px;
+  left: 433px;
+  margin-top: 30px;
+}
+
+body{
+  background : #E8ECF1;
+}
+
+.container{
+  display:flex;
+  min-height:100vh;
+}
+
+.sidebar{
+  width:260px;
+  background:#fff;
+  border-right:1px solid #ddd;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+}
+
+.logo{
+  width:150px;
+  margin-bottom:25px;
+}
+
+nav{
+  margin-top:10px;
+}
+
+.nav-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px;
+  margin-bottom:6px;
+  text-decoration:none;
+  color:#333;
+  border-radius:6px;
+}
+
+.nav-item:hover, .nav-item.active{
+  background:#E6F2EA;
+  color:#2F7D52;
+}
+
+.nav-icon{
+  width:18px;
+}
+
+.help-box{
+  margin-top:auto;
+  background:#F4F8FB;
+  padding:15px;
+  border-radius:6px;
+}
+
+.help-box button{
+  width:100%;
+  margin-top:10px;
+  padding:8px;
+  border:none;
+  background:#1F4451;
+  color:white;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.phonelogo{
+  width:30px;
+  margin-bottom:8px;
+}
+
+.content{
+  flex:1;
+  padding:30px;
+}
+
+.top-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.top-bar input{
+  padding:10px;
+  width:240px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:white;
+  border-bottom:1px solid #ddd;
+  border-radius: 8px 8px 8px 8px;
+  overflow: hidden; 
+
+}
+
+thead{
+  background:white;
+  border-collapse:collapse;
+  border-bottom:1px solid #ddd;
+  padding: 10px 10px;
+}
+
+th,td{
+  padding:16px 8px;
+
+}
+
+td:first-child{
+  width:26px;
+  padding-right:4px;
+}
+
+td:nth-child(2){
+  padding-left:4px;
+}
+
+td:last-child{
+  padding-right:8px;
+}
+
+.status{
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+  display:inline-block;
+}
+
+.status.sign{
+  background:#436D7C;
+  color: #FFFFFF;
+}
+
+.status.pending{
+  background:#E8ECF1;
+  color:#626D82;
+}
+
+.status.complete{
+  background:#D3F7B5;
+  color:#1F4451;
+}
+
+button{
+  padding:7px 12px;
+  height: 34px;
+  width: 134px;
+  left: 1323px;
+  border-radius: 5px;
+  border:1px solid #ccc;
+  background:white;
+}
+
+.primary{
+  background:#1E6FD9;
+  color:white;
+  border:none;
+}
+
+.dots{
+  display:flex;
+  align-items:center;
+  gap:2px;
+}
+
+.nav-iconss{
+  width:5px;
+}
+
+
+.breadcrumb{
+  width: 260px;
+height: 22px;
+opacity: 1px;
+top: 30px;
+left: 434px;
+border-radius: 6px;
+gap: 14px;
+
+  color: gray;
+  margin-bottom: 8px;
+}
+
+tbody tr{
+  border-bottom:1px solid #ddd;
+}
+
+.profile-box{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.profile-img{
+  width: 40px;
+height: 40px;
+opacity: 1;
+top: 107px;
+left: 49px;
+border-radius: 8px;
+
+}
+
+.profile-info{
+  flex: 1;
+}
+
+.profile-name{
+  font-size: 13px;
+  font-weight: 600;
+  font-style: Spline Sans;
+  font-style: SemiBold;
+  margin: 0;
+  font-family: "Spline Sans", sans-serif;
+}
+
+.profile-role{
+  font-size: 12px;
+  color: #777;
+  margin: 0;
+}
+
+.profile-arrow{
+  font-size: 14px;
+  color: #777;
+}
+
+.search-box{
+  position: relative;
+}
+
+.search-box input{
+  padding: 10px 12px 10px 36px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.search-icon{
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  width: 16px;
+  transform: translateY(-50%);
+}
+
+.add-btn{
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.modal{
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content{
+  width: 380px;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal-content input, .modal-content select{
+  width: 100%;
+  height: 42px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  outline: none;
+}
+
+.modal-content input:focus, .modal-content select:focus{
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.modal-actions{
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+#cancelBtn{
+  background: #f3f4f6;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#saveBtn{
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#saveBtn:hover{
+  background: #1e40af;
+}
+
+.actions{
+  display: flex;
+  align-items: center;
+  gap:10px;
+}
+
+tbody{
+  display:block;
+  max-height:400px;
+  overflow-y:auto;
+}
+
+thead, tbody tr{
+  display:table;
+  width:100%;
+  table-layout:fixed;
+}
+
+.menu{
+  position: relative;
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.menu-dropdown{
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 28px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  z-index: 10;
+  width: 110px;
+}
+
+.menu-dropdown button{
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.menu-dropdown button:hover{
+  background: #f1f5f9;
+}
+
+.pname{
+  font-family: Inter;
+  font-weight: 500;
+  font-style: Italic;
+  font-size: 13px;
+  width: 178;
+  height: 21;
+  opacity: 1;
+  top: 357px;
+  left: 920px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #B5BDCD;
+}
+
+.sname{
+  width: 178;
+  height: 21;
+  opacity: 1;
+  top: 357px;
+  left: 920px;
+  font-family: Inter;
+  font-weight: 500;
+  font-style: Italic;
+  font-size: 13px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #436D7C;
+}
+.ht{
+  
+  color: #436D7C;
+
+ 
+}
+.rt{
+  color: #B5BDCD;
+  font: Spline Sans;
+  margin-left: 20px;
+  
+}
+.we{
+  margin-left: 20px;
+  color: #B5BDCD;
+}
