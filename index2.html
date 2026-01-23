@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Documents</title>
+  <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+<div class="container">
+  <aside class="sidebar">
+    <img src="img/Union.svg" class="logo" alt="Neptune">
+
+    <div class="profile-box">
+      <img src="img/Group 79.svg" alt="User" class="profile-img">
+      <div class="profile-info">
+        <p class="profile-name">Jessica Thompson</p>
+        <p class="profile-role">Primary User</p>
+      </div>
+      <span class="profile-arrow"><select class="ic"><option></option><option>Logout</option></select></span>
+    </div>
+
+    <nav>
+      <a href="#" class="nav-item">
+        <img src="img/home 1.svg" class="nav-icon">
+        <span>Home</span>
+      </a>
+      <a href="#" class="nav-item active">
+        <img src="img/file-text 1.svg" class="nav-icon">
+        <span>Documents</span>
+      </a>
+      <a href="#" class="nav-item">
+        <img src="img/message-circle 1.svg" class="nav-icon">
+        <span>Chat with Neptune</span>
+      </a>
+      <a href="#" class="nav-item">
+        <img src="img/help-circle 1.svg" class="nav-icon">
+        <span>Help</span>
+      </a>
+      <a href="#" class="nav-item">
+        <img src="img/settings 1.svg" class="nav-icon">
+        <span>Settings</span>
+      </a>
+    </nav>
+
+    <div class="help-box">
+      <img src="img/phone 1.svg" class="phonelogo">
+      <p><strong class="textboxx">Having trouble?</strong></p>
+      <p class="text">Feel free to contact us and we will help you through the process.</p>
+      <button id="Contact">Contact us</button>
+    </div>
+  </aside>
+<div class="ru">
+  <main class="content">
+    <p class="breadcrumb"><span class="ht">Home </span> <span class="we">></span><span class="rt"> Documents</span></p>
+    <header class="top-bar">
+      <h1>My Documents</h1>
+      <div class="actions">
+        <div class="search-box">
+          <img src="img/Layer_1.svg" class="search-icon">
+          <input type="search" placeholder="Search documents">
+        </div>
+        <button id="addDocBtn" class="add-btn">+</button>
+      </div>
+
+      <div class="modal" id="docModal">
+        <div class="modal-content">
+          <h3>Add New Document</h3>
+          <input id="docName" type="text" placeholder="Document Name">
+          <select id="docStatus">
+            <option value="Pending">Pending</option>
+            <option value="Needs Signing">Needs Signing</option>
+            <option value="Completed">Completed</option>
+          </select>
+          <input id="docDate" type="date">
+          <input id="docPeople" type="number" min="1" placeholder="People involved">
+          <div class="modal-actions">
+            <button id="cancelBtn">Cancel</button>
+            <button id="saveBtn">Add</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="tree">
+    <table>
+      <thead>
+        <tr>
+          <td ><input type="checkbox"></td>
+          <td class="abc"><img src="Icon Right.svg" alt="Icon">  <b>Document Name</b></td>
+          <td><span><b>Status</b></span></td>
+          <td ><b>Last Modified</b></td>
+          <td></td>
+        </tr>
+      </thead>
+
+      <tbody class="ram">
+        <tr >
+          <td><input type="checkbox"></td>
+          <td>Title of Document Goes Here</td>
+          <td><span class="status sign">Needs Signing</span></td>
+          <td class="ram">10/22/2024<br>2:01 pm</td>
+          <td class="dots">
+            <button>Sign now</button>
+            <div class="menu">
+              <img src="img/more_vert_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 2.svg" class="nav-icons menu-btn">
+              <div class="menu-dropdown">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+              </div>
+            </div>
+          </td>
+          </tr>
+
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>Title of Document Goes Here</td>
+          <td>
+            <span class="status pending">Pending</span><br>
+            <small><span class="pname">Waiting for </span><span class="sname">1 people</span></small>
+          </td>
+          <td class="ram">10/22/2024<br>2:01 pm</td>
+          <td class="dots">
+            <button>Preview</button>
+            <div class="menu">
+              <img src="img/more_vert_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 2.svg" class="nav-iconss menu-btn">
+              <div class="menu-dropdown">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>Title of Document Goes Here</td>
+          <td>
+            <span class="status pending">Pending</span><br>
+            <small><span class="pname">Waiting for </span><span class="sname">2 people</span></small>
+          </td>
+          <td class="ram">10/22/2024<br>2:01 pm</td>
+          <td class="dots">
+            <button>Preview</button>
+            <div class="menu">
+              <img src="img/more_vert_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 2.svg" class="nav-iconss menu-btn">
+              <div class="menu-dropdown">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>Title of Document Goes Here</td>
+          <td><span class="status complete">Completed</span></td>
+          <td class="ram">10/22/2024<br>2:01 pm</td>
+          <td class="dots">
+            <button>Download PDF</button>
+            <div class="menu">
+              <img src="img/more_vert_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 2.svg" class="nav-iconss menu-btn">
+              <div class="menu-dropdown">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>Title of Document Goes Here</td>
+          <td><span class="status complete">Completed</span></td>
+          <td class="ram">10/22/2024<br>2:01 pm</td>
+          <td class="dots">
+            <button>Download PDF</button>
+            <div class="menu">
+              <img src="img/more_vert_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 2.svg" class="nav-iconss menu-btn">
+              <div class="menu-dropdown">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>Title of Document Goes Here</td>
+          <td><span class="status complete">Completed</span></td>
+          <td class="ram">10/22/2024<br>2:01 pm</td>
+          <td class="dots">
+            <button>Download PDF</button>
+            <div class="menu">
+              <img src="img/more_vert_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 2.svg" class="nav-iconss menu-btn">
+              <div class="menu-dropdown">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </main>
+</div>
+</div>
+<script src="project.js"></script>
+</body>
+</html>
