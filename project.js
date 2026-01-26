@@ -1,157 +1,306 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const addBtn = document.getElementById("addDocBtn")
-  const modal = document.getElementById("docModal")
-  const cancelBtn = document.getElementById("cancelBtn")
-  const saveBtn = document.getElementById("saveBtn")
-  const searchInput = document.querySelector(".search-box input")
-  const tbody = document.querySelector("table tbody")
+var addBtn = document.getElementById("addDocBtn");
+var modal = document.getElementById("docModal");
+var cancelBtn = document.getElementById("cancelBtn");
+var saveBtn = document.getElementById("saveBtn");
+var searchInput = document.getElementsByTagName("input")[0];
+var table = document.getElementsByTagName("table")[0];
+var tbody = table.getElementsByTagName("tbody")[0];
 
-  let editingRow = null
+var editingRow = null;
 
-  function saveToStorage() {
-    const rows = [...tbody.querySelectorAll("tr")].map(row => {
-      const cells = row.querySelectorAll("td")
-      return {
-        name: cells[1].innerText,
-        status: cells[2].querySelector(".status").innerText,
-        people: cells[2].innerText.match(/\d+/)?.[0] || "",
-        date: cells[3].innerText
-      }
-    })
-    localStorage.setItem("documents", JSON.stringify(rows))
+function saveToStorage() {
+  var rows = tbody.getElementsByTagName("tr");
+  var data = [];
+
+  Array.from(rows).forEach(function (row) {
+    var cells = row.getElementsByTagName("td");
+
+    var name = cells[1].innerText;
+    var status = cells[2].getElementsByTagName("span")[0].innerText;
+    var date = cells[3].innerText;
+    var people = "";
+
+    var smallTags = cells[2].getElementsByTagName("small");
+    if (smallTags.length > 0) {
+      var text = smallTags[0].innerText;
+      Array.from(text).forEach(function (ch) {
+        if (ch >= "0" && ch <= "9") {
+          people = people + ch;
+        }
+      });
+    }
+
+    var obj = {};
+    obj.name = name;
+    obj.status = status;
+    obj.people = people;
+    obj.date = date;
+
+    data.push(obj);
+  });
+
+  localStorage.setItem("documents", JSON.stringify(data));
+}
+
+function loadFromStorage() {
+  var data = localStorage.getItem("documents");
+  if (data === null) {
+    return;
   }
 
-  function loadFromStorage() {
-    const data = JSON.parse(localStorage.getItem("documents"))
-    if (!data) return
-    tbody.innerHTML = ""
-    data.forEach(doc => {
-      let statusClass = ""
-      if (doc.status === "Pending") statusClass = "pending"
-      if (doc.status === "Needs Signing") statusClass = "sign"
-      if (doc.status === "Completed") statusClass = "complete"
-      const row = document.createElement("tr")
-      row.innerHTML = `
-        <td><input type="checkbox"></td>
-        <td>${doc.name}</td>
-        <td>
-          <span class="status ${statusClass}">${doc.status}</span>
-          ${doc.status === "Pending" ? `<br><span class="pname">Waiting for </span><span class="sname">${doc.people} people</span>` : ""}
-        </td>
-        <td>${doc.date}</td>
-        <td class="dots">
-          <button>${doc.status === "Needs Signing" ? "Sign now" : doc.status === "Completed" ? "Download PDF" : "Preview"}</button>
-          <div class="menu">
-            <img src="dots.png" class="nav-iconss menu-btn">
-            <div class="menu-dropdown">
-              <button class="edit-btn">Edit</button>
-              <button class="delete-btn">Delete</button>
-            </div>
-          </div>
-        </td>
-      `
-      tbody.appendChild(row)
-    })
-  }
+  var docs = JSON.parse(data);
+  tbody.innerHTML = "";
 
-  loadFromStorage()
+  docs.forEach(function (doc) {
+    var statusClass = "";
 
-  addBtn.onclick = () => {
-    editingRow = null
-    modal.style.display = "flex"
-  }
+    if (doc.status === "Pending") {
+      statusClass = "pending";
+    }
+    if (doc.status === "Needs Signing") {
+      statusClass = "sign";
+    }
+    if (doc.status === "Completed") {
+      statusClass = "complete";
+    }
 
-  cancelBtn.onclick = () => {
-    modal.style.display = "none"
-    editingRow = null
-  }
+    var row = document.createElement("tr");
 
-  saveBtn.onclick = () => {
-    const name = docName.value.trim()
-    const status = docStatus.value
-    const date = docDate.value
-    const people = docPeople.value
+    var td1 = document.createElement("td");
+    td1.innerHTML = "<input type='checkbox'>";
+    row.appendChild(td1);
 
-    if (!name || !date) return
+    var td2 = document.createElement("td");
+    td2.innerText = doc.name;
+    row.appendChild(td2);
 
-    let statusClass = ""
-    if (status === "Pending") statusClass = "pending"
-    if (status === "Needs Signing") statusClass = "sign"
-    if (status === "Completed") statusClass = "complete"
+    var td3 = document.createElement("td");
+    td3.innerHTML = "<span class='status " + statusClass + "'>" + doc.status + "</span>";
+    if (doc.status === "Pending") {
+      td3.innerHTML = td3.innerHTML + "<br><small><span class='pname'>Waiting for </span><span class='sname'>" + doc.people + " people</span></small>";
+    }
+    row.appendChild(td3);
 
-    const rowHTML = `
-      <td><input type="checkbox"></td>
-      <td>${name}</td>
-      <td>
-        <span class="status ${statusClass}">${status}</span>
-        ${status === "Pending" ? `<br><span class="pname">Waiting for </span><span class="sname">${people} people</span>` : ""}
-      </td>
-      <td>${date}</td>
-      <td class="dots">
-        <button>${status === "Needs Signing" ? "Sign now" : status === "Completed" ? "Download PDF" : "Preview"}</button>
-        <div class="menu">
-          <img src="dots.png" class="nav-iconss menu-btn">
-          <div class="menu-dropdown">
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
-          </div>
-        </td>
-      </tr>
-    `
+    var td4 = document.createElement("td");
+    td4.innerText = doc.date;
+    row.appendChild(td4);
 
-    if (editingRow) {
-      editingRow.innerHTML = rowHTML
-      editingRow = null
+    var td5 = document.createElement("td");
+    td5.className = "dots";
+
+    var btn = document.createElement("button");
+    if (doc.status === "Needs Signing") {
+      btn.innerText = "Sign now";
+    } else if (doc.status === "Completed") {
+      btn.innerText = "Download PDF";
     } else {
-      const row = document.createElement("tr")
-      row.innerHTML = rowHTML
-      tbody.appendChild(row)
+      btn.innerText = "Preview";
     }
+    td5.appendChild(btn);
 
-    modal.style.display = "none"
-    docName.value = ""
-    docPeople.value = ""
-    docDate.value = ""
-    saveToStorage()
+    var menuDiv = document.createElement("div");
+    menuDiv.className = "menu";
+
+    var img = document.createElement("img");
+    img.src = "img/dot.svg";
+    img.className = "nav-iconss menu-btn";
+    menuDiv.appendChild(img);
+
+    var dropDiv = document.createElement("div");
+    dropDiv.className = "menu-dropdown";
+
+    var editBtn = document.createElement("button");
+    editBtn.innerText = "Edit";
+    dropDiv.appendChild(editBtn);
+
+    var delBtn = document.createElement("button");
+    delBtn.innerText = "Delete";
+    dropDiv.appendChild(delBtn);
+
+    menuDiv.appendChild(dropDiv);
+    td5.appendChild(menuDiv);
+    row.appendChild(td5);
+
+    tbody.appendChild(row);
+  });
+}
+
+loadFromStorage();
+
+addBtn.onclick = function () {
+  editingRow = null;
+  modal.style.display = "flex";
+};
+
+cancelBtn.onclick = function () {
+  modal.style.display = "none";
+  editingRow = null;
+};
+
+saveBtn.onclick = function () {
+  var name = docName.value;
+  var status = docStatus.value;
+  var date = docDate.value;
+  var people = docPeople.value;
+
+  if (name === "" || date === "") {
+    return;
   }
 
-  searchInput.addEventListener("input", function () {
-    const filter = this.value.toLowerCase()
-    tbody.querySelectorAll("tr").forEach(row => {
-      const text = row.innerText.toLowerCase()
-      row.style.display = text.includes(filter) ? "" : "none"
-    })
-  })
+  var statusClass = "";
+  if (status === "Pending") {
+    statusClass = "pending";
+  }
+  if (status === "Needs Signing") {
+    statusClass = "sign";
+  }
+  if (status === "Completed") {
+    statusClass = "complete";
+  }
 
-  document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("menu-btn")) {
-      e.stopPropagation()
-      const menu = e.target.nextElementSibling
-      document.querySelectorAll(".menu-dropdown").forEach(m => {
-        if (m !== menu) m.style.display = "none"
-      })
-      menu.style.display = menu.style.display === "block" ? "none" : "block"
-      return
+  if (editingRow !== null) {
+    var cells = editingRow.getElementsByTagName("td");
+    cells[1].innerText = name;
+    cells[2].innerHTML = "<span class='status " + statusClass + "'>" + status + "</span>";
+    if (status === "Pending") {
+      cells[2].innerHTML = cells[2].innerHTML + "<br><small><span class='pname'>Waiting for </span><span class='sname'>" + people + " people</span></small>";
+    }
+    cells[3].innerText = date;
+
+    var actionBtn = cells[4].getElementsByTagName("button")[0];
+    if (status === "Needs Signing") {
+      actionBtn.innerText = "Sign now";
+    } else if (status === "Completed") {
+      actionBtn.innerText = "Download PDF";
+    } else {
+      actionBtn.innerText = "Preview";
     }
 
-    document.querySelectorAll(".menu-dropdown").forEach(m => m.style.display = "none")
+    editingRow = null;
+  } else {
+    var row = document.createElement("tr");
 
-    if (e.target.classList.contains("delete-btn")) {
-      const row = e.target.closest("tr")
-      row.remove()
-      saveToStorage()
-      return
+    var td1 = document.createElement("td");
+    td1.innerHTML = "<input type='checkbox'>";
+    row.appendChild(td1);
+
+    var td2 = document.createElement("td");
+    td2.innerText = name;
+    row.appendChild(td2);
+
+    var td3 = document.createElement("td");
+    td3.innerHTML = "<span class='status " + statusClass + "'>" + status + "</span>";
+    if (status === "Pending") {
+      td3.innerHTML = td3.innerHTML + "<br><small><span class='pname'>Waiting for </span><span class='sname'>" + people + " people</span></small>";
+    }
+    row.appendChild(td3);
+
+    var td4 = document.createElement("td");
+    td4.innerText = date;
+    row.appendChild(td4);
+
+    var td5 = document.createElement("td");
+    td5.className = "dots";
+
+    var btn = document.createElement("button");
+    if (status === "Needs Signing") {
+      btn.innerText = "Sign now";
+    } else if (status === "Completed") {
+      btn.innerText = "Download PDF";
+    } else {
+      btn.innerText = "Preview";
+    }
+    td5.appendChild(btn);
+
+    var menuDiv = document.createElement("div");
+    menuDiv.className = "menu";
+
+    var img = document.createElement("img");
+    img.src = "img/dot.svg";
+    img.className = "nav-iconss menu-btn";
+    menuDiv.appendChild(img);
+
+    var dropDiv = document.createElement("div");
+    dropDiv.className = "menu-dropdown";
+
+    var editBtn = document.createElement("button");
+    editBtn.innerText = "Edit";
+    dropDiv.appendChild(editBtn);
+
+    var delBtn = document.createElement("button");
+    delBtn.innerText = "Delete";
+    dropDiv.appendChild(delBtn);
+
+    menuDiv.appendChild(dropDiv);
+    td5.appendChild(menuDiv);
+    row.appendChild(td5);
+
+    tbody.appendChild(row);
+  }
+
+  modal.style.display = "none";
+  docName.value = "";
+  docPeople.value = "";
+  docDate.value = "";
+  saveToStorage();
+};
+
+searchInput.onkeyup = function () {
+  var value = searchInput.value.toLowerCase();
+  var rows = tbody.getElementsByTagName("tr");
+
+  Array.from(rows).forEach(function (row) {
+    var text = row.innerText.toLowerCase();
+    if (text.indexOf(value) > -1) {
+      row.style.display = "";
+    } else {
+      row.style.display = "none";
+    }
+  });
+};
+
+document.onclick = function (e) {
+  var target = e.target;
+
+  if (target.className.indexOf("menu-btn") !== -1) {
+    var menu = target.parentNode.getElementsByClassName("menu-dropdown")[0];
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+    return;
+  }
+
+  var allMenus = document.getElementsByClassName("menu-dropdown");
+  Array.from(allMenus).forEach(function (menu) {
+    menu.style.display = "none";
+  });
+
+  if (target.innerText === "Delete") {
+    var row = target.closest("tr");
+    row.parentNode.removeChild(row);
+    saveToStorage();
+  }
+
+  if (target.innerText === "Edit") {
+    editingRow = target.closest("tr");
+    var cells = editingRow.getElementsByTagName("td");
+
+    docName.value = cells[1].innerText;
+    docStatus.value = cells[2].getElementsByTagName("span")[0].innerText;
+    docDate.value = cells[3].innerText;
+
+    var smallTags = cells[2].getElementsByTagName("small");
+    if (smallTags.length > 0) {
+      var text = smallTags[0].innerText;
+      var number = "";
+      Array.from(text).forEach(function (ch) {
+        if (ch >= "0" && ch <= "9") {
+          number = number + ch;
+        }
+      });
+      docPeople.value = number;
+    } else {
+      docPeople.value = "";
     }
 
-    if (e.target.classList.contains("edit-btn")) {
-      editingRow = e.target.closest("tr")
-      const cells = editingRow.querySelectorAll("td")
-      docName.value = cells[1].innerText
-      docStatus.value = cells[2].querySelector(".status").innerText
-      docDate.value = cells[3].innerText
-      const peopleText = cells[2].innerText.match(/\d+/)
-      docPeople.value = peopleText ? peopleText[0] : ""
-      modal.style.display = "flex"
-    }
-  })
-})
+    modal.style.display = "flex";
+  }
+};
