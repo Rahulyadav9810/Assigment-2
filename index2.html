@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +17,7 @@
         <p class="profile-name">Jessica Thompson</p>
         <p class="profile-role">Primary User</p>
       </div>
-      <span class="profile-arrow">⌄</span>
+      <span class="profile-arrow"><select class="ic"><option></option><option>Logout</option></select></span>
     </div>
 
     <nav>
@@ -44,12 +45,12 @@
 
     <div class="help-box">
       <img src="img/phone 1.svg" class="phonelogo">
-      <p><strong>Having trouble?</strong></p>
-      <p>Feel free to contact us and we will help you through the process.</p>
-      <button>Contact us</button>
+      <p><strong class="textboxx">Having trouble?</strong></p>
+      <p class="text">Feel free to contact us and we will help you through the process.</p>
+      <button id="Contact">Contact us</button>
     </div>
   </aside>
-
+<div class="ru">
   <main class="content">
     <p class="breadcrumb"><span class="ht">Home </span> <span class="we">></span><span class="rt"> Documents</span></p>
     <header class="top-bar">
@@ -80,37 +81,36 @@
         </div>
       </div>
     </header>
-
+    <div class="tree">
     <table>
       <thead>
         <tr>
           <td ><input type="checkbox"></td>
-          <td class="abc"><img src="Icon Right.svg" alt="Icon">  <b>Document Name</b></td>
+          <td class="abc"><img src="img/Icon Right.svg" alt="Icon">  <b>Document Name</b></td>
           <td><span><b>Status</b></span></td>
-          <td><b>Last Modified</b></td>
+          <td ><b>Last Modified</b></td>
           <td></td>
         </tr>
       </thead>
 
-      <tbody>
-        <tr>
+      <tbody class="ram">
+        <tr >
           <td><input type="checkbox"></td>
           <td>Title of Document Goes Here</td>
           <td><span class="status sign">Needs Signing</span></td>
-          <td>10/22/2024<br>2:01 pm</td>
+          <td class="ram">10/22/2024<br>2:01 pm</td>
           <td class="dots">
             <button>Sign now</button>
-            
-          </td>
-          <td><div class="menu">
-              <img src="img/more_vert_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 2.svg" class="nav-icons menu-btn">
+            <div class="menu">
+              <img src="img/dot.svg" class="nav-icons menu-btn">
               <div class="menu-dropdown">
                 <button class="edit-btn">Edit</button>
                 <button class="delete-btn">Delete</button>
               </div>
-            </div></td>
+            </div>
+          </td>
+          <td></td>
           </tr>
-        </tr>
 
         <tr>
           <td><input type="checkbox"></td>
@@ -119,17 +119,18 @@
             <span class="status pending">Pending</span><br>
             <small><span class="pname">Waiting for </span><span class="sname">1 people</span></small>
           </td>
-          <td>10/22/2024<br>2:01 pm</td>
+          <td class="ram">10/22/2024<br>2:01 pm</td>
           <td class="dots">
             <button>Preview</button>
             <div class="menu">
-              <img src="img/more_vert_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 2.svg" class="nav-iconss menu-btn">
+              <img src="img/dot.svg" class="nav-iconss menu-btn">
               <div class="menu-dropdown">
                 <button class="edit-btn">Edit</button>
                 <button class="delete-btn">Delete</button>
               </div>
             </div>
           </td>
+          <td></td>
         </tr>
 
         <tr>
@@ -139,74 +140,79 @@
             <span class="status pending">Pending</span><br>
             <small><span class="pname">Waiting for </span><span class="sname">2 people</span></small>
           </td>
-          <td>10/22/2024<br>2:01 pm</td>
+          <td class="ram">10/22/2024<br>2:01 pm</td>
           <td class="dots">
             <button>Preview</button>
             <div class="menu">
-              <img src="img/more_vert_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 2.svg" class="nav-iconss menu-btn">
+              <img src="img/dot.svg" class="nav-iconss menu-btn">
               <div class="menu-dropdown">
                 <button class="edit-btn">Edit</button>
                 <button class="delete-btn">Delete</button>
               </div>
             </div>
           </td>
+          <td></td>
         </tr>
 
         <tr>
           <td><input type="checkbox"></td>
           <td>Title of Document Goes Here</td>
           <td><span class="status complete">Completed</span></td>
-          <td>10/22/2024<br>2:01 pm</td>
+          <td class="ram">10/22/2024<br>2:01 pm</td>
           <td class="dots">
             <button>Download PDF</button>
             <div class="menu">
-              <img src="img/more_vert_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 2.svg" class="nav-iconss menu-btn">
+              <img src="img/dot.svg" class="nav-iconss menu-btn">
               <div class="menu-dropdown">
                 <button class="edit-btn">Edit</button>
                 <button class="delete-btn">Delete</button>
               </div>
             </div>
           </td>
+          <td></td>
         </tr>
 
         <tr>
           <td><input type="checkbox"></td>
           <td>Title of Document Goes Here</td>
           <td><span class="status complete">Completed</span></td>
-          <td>10/22/2024<br>2:01 pm</td>
+          <td class="ram">10/22/2024<br>2:01 pm</td>
           <td class="dots">
             <button>Download PDF</button>
             <div class="menu">
-              <img src="img/more_vert_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 2.svg" class="nav-iconss menu-btn">
+              <img src="img/dot.svg" class="nav-iconss menu-btn">
               <div class="menu-dropdown">
                 <button class="edit-btn">Edit</button>
                 <button class="delete-btn">Delete</button>
               </div>
             </div>
           </td>
+          <td></td>
         </tr>
 
         <tr>
           <td><input type="checkbox"></td>
           <td>Title of Document Goes Here</td>
           <td><span class="status complete">Completed</span></td>
-          <td>10/22/2024<br>2:01 pm</td>
+          <td class="ram">10/22/2024<br>2:01 pm</td>
           <td class="dots">
             <button>Download PDF</button>
             <div class="menu">
-              <img src="img/more_vert_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 2.svg" class="nav-iconss menu-btn">
+              <img src="img/dot.svg" class="nav-iconss menu-btn">
               <div class="menu-dropdown">
                 <button class="edit-btn">Edit</button>
                 <button class="delete-btn">Delete</button>
               </div>
             </div>
           </td>
+          <td></td>
         </tr>
       </tbody>
     </table>
+    </div>
   </main>
 </div>
-
+</div>
 <script src="project.js"></script>
 </body>
 </html>
