@@ -1,28 +1,28 @@
-var addBtn = document.getElementById("addDocBtn");
-var modal = document.getElementById("docModal");
-var cancelBtn = document.getElementById("cancelBtn");
-var saveBtn = document.getElementById("saveBtn");
-var searchInput = document.getElementsByTagName("input")[0];
-var table = document.getElementsByTagName("table")[0];
-var tbody = table.getElementsByTagName("tbody")[0];
+const addBtn = document.getElementById("addDocBtn");
+const modal = document.getElementById("docModal");
+const cancelBtn = document.getElementById("cancelBtn");
+const saveBtn = document.getElementById("saveBtn");
+const searchInput = document.getElementsByTagName("input")[0];
+const table = document.getElementsByTagName("table")[0];
+const tbody = table.getElementsByTagName("tbody")[0];
 
-var editingRow = null;
+let editingRow = null;
 
 function saveToStorage() {
-  var rows = tbody.getElementsByTagName("tr");
-  var data = [];
+  const rows = tbody.getElementsByTagName("tr");
+  const data = [];
 
   Array.from(rows).forEach(function (row) {
-    var cells = row.getElementsByTagName("td");
+    const cells = row.getElementsByTagName("td");
 
-    var name = cells[1].innerText;
-    var status = cells[2].getElementsByTagName("span")[0].innerText;
-    var date = cells[3].innerText;
-    var people = "";
+    const name = cells[1].innerText;
+    const status = cells[2].getElementsByTagName("span")[0].innerText;
+    const date = cells[3].innerText;
+    let people = "";
 
-    var smallTags = cells[2].getElementsByTagName("small");
+    const smallTags = cells[2].getElementsByTagName("small");
     if (smallTags.length > 0) {
-      var text = smallTags[0].innerText;
+      const text = smallTags[0].innerText;
       Array.from(text).forEach(function (ch) {
         if (ch >= "0" && ch <= "9") {
           people = people + ch;
@@ -30,7 +30,7 @@ function saveToStorage() {
       });
     }
 
-    var obj = {};
+    const obj = {};
     obj.name = name;
     obj.status = status;
     obj.people = people;
@@ -43,16 +43,16 @@ function saveToStorage() {
 }
 
 function loadFromStorage() {
-  var data = localStorage.getItem("documents");
+  const data = localStorage.getItem("documents");
   if (data === null) {
     return;
   }
 
-  var docs = JSON.parse(data);
+  const docs = JSON.parse(data);
   tbody.innerHTML = "";
 
   docs.forEach(function (doc) {
-    var statusClass = "";
+    let statusClass = "";
 
     if (doc.status === "Pending") {
       statusClass = "pending";
@@ -64,31 +64,35 @@ function loadFromStorage() {
       statusClass = "complete";
     }
 
-    var row = document.createElement("tr");
+    const row = document.createElement("tr");
 
-    var td1 = document.createElement("td");
+    const td1 = document.createElement("td");
     td1.innerHTML = "<input type='checkbox'>";
     row.appendChild(td1);
 
-    var td2 = document.createElement("td");
+    const td2 = document.createElement("td");
     td2.innerText = doc.name;
     row.appendChild(td2);
 
-    var td3 = document.createElement("td");
+    const td3 = document.createElement("td");
     td3.innerHTML = "<span class='status " + statusClass + "'>" + doc.status + "</span>";
     if (doc.status === "Pending") {
-      td3.innerHTML = td3.innerHTML + "<br><small><span class='pname'>Waiting for </span><span class='sname'>" + doc.people + " people</span></small>";
+      td3.innerHTML =
+        td3.innerHTML +
+        "<br><small><span class='pname'>Waiting for </span><span class='sname'>" +
+        doc.people +
+        " people</span></small>";
     }
     row.appendChild(td3);
 
-    var td4 = document.createElement("td");
+    const td4 = document.createElement("td");
     td4.innerText = doc.date;
     row.appendChild(td4);
 
-    var td5 = document.createElement("td");
+    const td5 = document.createElement("td");
     td5.className = "dots";
 
-    var btn = document.createElement("button");
+    const btn = document.createElement("button");
     if (doc.status === "Needs Signing") {
       btn.innerText = "Sign now";
     } else if (doc.status === "Completed") {
@@ -98,22 +102,22 @@ function loadFromStorage() {
     }
     td5.appendChild(btn);
 
-    var menuDiv = document.createElement("div");
+    const menuDiv = document.createElement("div");
     menuDiv.className = "menu";
 
-    var img = document.createElement("img");
+    const img = document.createElement("img");
     img.src = "img/dot.svg";
     img.className = "nav-iconss menu-btn";
     menuDiv.appendChild(img);
 
-    var dropDiv = document.createElement("div");
+    const dropDiv = document.createElement("div");
     dropDiv.className = "menu-dropdown";
 
-    var editBtn = document.createElement("button");
+    const editBtn = document.createElement("button");
     editBtn.innerText = "Edit";
     dropDiv.appendChild(editBtn);
 
-    var delBtn = document.createElement("button");
+    const delBtn = document.createElement("button");
     delBtn.innerText = "Delete";
     dropDiv.appendChild(delBtn);
 
@@ -138,16 +142,16 @@ cancelBtn.onclick = function () {
 };
 
 saveBtn.onclick = function () {
-  var name = docName.value;
-  var status = docStatus.value;
-  var date = docDate.value;
-  var people = docPeople.value;
+  const name = docName.value;
+  const status = docStatus.value;
+  const date = docDate.value;
+  const people = docPeople.value;
 
   if (name === "" || date === "") {
     return;
   }
 
-  var statusClass = "";
+  let statusClass = "";
   if (status === "Pending") {
     statusClass = "pending";
   }
@@ -159,15 +163,19 @@ saveBtn.onclick = function () {
   }
 
   if (editingRow !== null) {
-    var cells = editingRow.getElementsByTagName("td");
+    const cells = editingRow.getElementsByTagName("td");
     cells[1].innerText = name;
     cells[2].innerHTML = "<span class='status " + statusClass + "'>" + status + "</span>";
     if (status === "Pending") {
-      cells[2].innerHTML = cells[2].innerHTML + "<br><small><span class='pname'>Waiting for </span><span class='sname'>" + people + " people</span></small>";
+      cells[2].innerHTML =
+        cells[2].innerHTML +
+        "<br><small><span class='pname'>Waiting for </span><span class='sname'>" +
+        people +
+        " people</span></small>";
     }
     cells[3].innerText = date;
 
-    var actionBtn = cells[4].getElementsByTagName("button")[0];
+    const actionBtn = cells[4].getElementsByTagName("button")[0];
     if (status === "Needs Signing") {
       actionBtn.innerText = "Sign now";
     } else if (status === "Completed") {
@@ -178,31 +186,35 @@ saveBtn.onclick = function () {
 
     editingRow = null;
   } else {
-    var row = document.createElement("tr");
+    const row = document.createElement("tr");
 
-    var td1 = document.createElement("td");
+    const td1 = document.createElement("td");
     td1.innerHTML = "<input type='checkbox'>";
     row.appendChild(td1);
 
-    var td2 = document.createElement("td");
+    const td2 = document.createElement("td");
     td2.innerText = name;
     row.appendChild(td2);
 
-    var td3 = document.createElement("td");
+    const td3 = document.createElement("td");
     td3.innerHTML = "<span class='status " + statusClass + "'>" + status + "</span>";
     if (status === "Pending") {
-      td3.innerHTML = td3.innerHTML + "<br><small><span class='pname'>Waiting for </span><span class='sname'>" + people + " people</span></small>";
+      td3.innerHTML =
+        td3.innerHTML +
+        "<br><small><span class='pname'>Waiting for </span><span class='sname'>" +
+        people +
+        " people</span></small>";
     }
     row.appendChild(td3);
 
-    var td4 = document.createElement("td");
+    const td4 = document.createElement("td");
     td4.innerText = date;
     row.appendChild(td4);
 
-    var td5 = document.createElement("td");
+    const td5 = document.createElement("td");
     td5.className = "dots";
 
-    var btn = document.createElement("button");
+    const btn = document.createElement("button");
     if (status === "Needs Signing") {
       btn.innerText = "Sign now";
     } else if (status === "Completed") {
@@ -212,22 +224,22 @@ saveBtn.onclick = function () {
     }
     td5.appendChild(btn);
 
-    var menuDiv = document.createElement("div");
+    const menuDiv = document.createElement("div");
     menuDiv.className = "menu";
 
-    var img = document.createElement("img");
+    const img = document.createElement("img");
     img.src = "img/dot.svg";
     img.className = "nav-iconss menu-btn";
     menuDiv.appendChild(img);
 
-    var dropDiv = document.createElement("div");
+    const dropDiv = document.createElement("div");
     dropDiv.className = "menu-dropdown";
 
-    var editBtn = document.createElement("button");
+    const editBtn = document.createElement("button");
     editBtn.innerText = "Edit";
     dropDiv.appendChild(editBtn);
 
-    var delBtn = document.createElement("button");
+    const delBtn = document.createElement("button");
     delBtn.innerText = "Delete";
     dropDiv.appendChild(delBtn);
 
@@ -246,11 +258,11 @@ saveBtn.onclick = function () {
 };
 
 searchInput.onkeyup = function () {
-  var value = searchInput.value.toLowerCase();
-  var rows = tbody.getElementsByTagName("tr");
+  const value = searchInput.value.toLowerCase();
+  const rows = tbody.getElementsByTagName("tr");
 
   Array.from(rows).forEach(function (row) {
-    var text = row.innerText.toLowerCase();
+    const text = row.innerText.toLowerCase();
     if (text.indexOf(value) > -1) {
       row.style.display = "";
     } else {
@@ -260,37 +272,37 @@ searchInput.onkeyup = function () {
 };
 
 document.onclick = function (e) {
-  var target = e.target;
+  const target = e.target;
 
   if (target.className.indexOf("menu-btn") !== -1) {
-    var menu = target.parentNode.getElementsByClassName("menu-dropdown")[0];
+    const menu = target.parentNode.getElementsByClassName("menu-dropdown")[0];
     menu.style.display = menu.style.display === "block" ? "none" : "block";
     return;
   }
 
-  var allMenus = document.getElementsByClassName("menu-dropdown");
+  const allMenus = document.getElementsByClassName("menu-dropdown");
   Array.from(allMenus).forEach(function (menu) {
     menu.style.display = "none";
   });
 
   if (target.innerText === "Delete") {
-    var row = target.closest("tr");
+    const row = target.closest("tr");
     row.parentNode.removeChild(row);
     saveToStorage();
   }
 
   if (target.innerText === "Edit") {
     editingRow = target.closest("tr");
-    var cells = editingRow.getElementsByTagName("td");
+    const cells = editingRow.getElementsByTagName("td");
 
     docName.value = cells[1].innerText;
     docStatus.value = cells[2].getElementsByTagName("span")[0].innerText;
     docDate.value = cells[3].innerText;
 
-    var smallTags = cells[2].getElementsByTagName("small");
+    const smallTags = cells[2].getElementsByTagName("small");
     if (smallTags.length > 0) {
-      var text = smallTags[0].innerText;
-      var number = "";
+      const text = smallTags[0].innerText;
+      let number = "";
       Array.from(text).forEach(function (ch) {
         if (ch >= "0" && ch <= "9") {
           number = number + ch;
